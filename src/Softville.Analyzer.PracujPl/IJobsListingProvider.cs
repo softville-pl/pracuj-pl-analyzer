@@ -3,7 +3,7 @@
 
 namespace ConsoleApp;
 
-internal interface ISampleService
+internal interface IJobsListingProvider
 {
-    internal Task DisplayAsync(string message);
+    internal Task ProcessAsync();
 }

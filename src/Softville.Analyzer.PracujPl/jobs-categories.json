@@ -1,0 +1,142 @@
+﻿[
+    {
+        "name": "Administracja biurowa",
+        "id": 5001
+    },
+    {
+        "name": "Badania i rozwój",
+        "id": 5002
+    },
+    {
+        "name": "Bankowość",
+        "id": 5003
+    },
+    {
+        "name": "BHP & Ochrona środowiska",
+        "id": 5004
+    },
+    {
+        "name": "Budownictwo",
+        "id": 5005
+    },
+    {
+        "name": "Call Center",
+        "id": 5006
+    },
+    {
+        "name": "Doradztwo & Konsulting",
+        "id": 5037
+    },
+    {
+        "name": "Energetyka",
+        "id": 5036
+    },
+    {
+        "name": "Edukacja & Szkolenia",
+        "id": 5007
+    },
+    {
+        "name": "Finanse & Ekonomia",
+        "id": 5008
+    },
+    {
+        "name": "Franczyza & Własny biznes",
+        "id": 5009
+    },
+    {
+        "name": "Hotelarstwo & Gastronomia & Turystyka",
+        "id": 5010
+    },
+    {
+        "name": "Human Resources & Zasoby ludzkie",
+        "id": 5011
+    },
+    {
+        "name": "Internet & e-Commerce & Nowe media",
+        "id": 5013
+    },
+    {
+        "name": "Inżynieria",
+        "id": 5014
+    },
+    {
+        "name": "IT - Administracja",
+        "id": 5015
+    },
+    {
+        "name": "IT - Rozwój oprogramowania",
+        "id": 5016
+    },
+    {
+        "name": "Kontrola jakości",
+        "id": 5034
+    },
+    {
+        "name": "Łańcuch dostaw",
+        "id": 5017
+    },
+    {
+        "name": "Marketing",
+        "id": 5018
+    },
+    {
+        "name": "Media & Sztuka & Rozrywka",
+        "id": 5019
+    },
+    {
+        "name": "Nieruchomości",
+        "id": 5020
+    },
+    {
+        "name": "Obsługa klienta",
+        "id": 5021
+    },
+    {
+        "name": "Praca fizyczna",
+        "id": 5022
+    },
+    {
+        "name": "Prawo",
+        "id": 5023
+    },
+    {
+        "name": "Produkcja",
+        "id": 5024
+    },
+    {
+        "name": "Public Relations",
+        "id": 5025
+    },
+    {
+        "name": "Reklama & Grafika & Kreacja & Fotografia",
+        "id": 5026
+    },
+    {
+        "name": "Sektor publiczny",
+        "id": 5027
+    },
+    {
+        "name": "Sprzedaż",
+        "id": 5028
+    },
+    {
+        "name": "Transport & Spedycja & Logistyka",
+        "id": 5031
+    },
+    {
+        "name": "Ubezpieczenia",
+        "id": 5032
+    },
+    {
+        "name": "Zakupy",
+        "id": 5033
+    },
+    {
+        "name": "Zdrowie & Uroda & Rekreacja",
+        "id": 5035
+    },
+    {
+        "name": "Inne",
+        "id": 5012
+    }
+]

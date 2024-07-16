@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ConsoleApp\ConsoleApp.csproj" />
+    <ProjectReference Include="..\..\src\Softville.Analyzer.PracujPl\Softville.Analyzer.PracujPl.csproj" />
   </ItemGroup>
 
 </Project>

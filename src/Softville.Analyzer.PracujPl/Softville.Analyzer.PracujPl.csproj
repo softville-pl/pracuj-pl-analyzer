@@ -3,10 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <PublishAot>false</PublishAot>
+    <RootNamespace>ConsoleApp</RootNamespace>
 
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AngleSharp" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection"/>
     <PackageReference Include="Microsoft.Extensions.Hosting"/>
     <PackageReference Include="Microsoft.Extensions.Logging"/>
@@ -31,6 +33,10 @@
     </None>
 
     <InternalsVisibleTo Include="UnitTests"/>
+
+    <None Update="jobs-categories.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

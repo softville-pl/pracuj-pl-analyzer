@@ -13,8 +13,12 @@ using Microsoft.Extensions.Logging;
 using var host = CreateHostBuilder(args).Build();
 await host.StartAsync();
 
-var sampleService = host.Services.GetRequiredService<ISampleService>();
-await sampleService.DisplayAsync("Hello world!");
+// var sampleService = host.Services.GetRequiredService<IJobsListingProvider>();
+// await sampleService.ProcessAsync();
+
+var sampleService = host.Services.GetRequiredService<JobDetailsProvider>();
+await sampleService.ProcessAsync(CancellationToken.None);
+
 
 Console.WriteLine("Press any key to continue");
 Console.ReadKey();
@@ -36,6 +40,12 @@ static IHostBuilder CreateHostBuilder(string[] args) =>
             .SetMinimumLevel(LogLevel.Information))
         .ConfigureServices((context, services) =>
         {
-            services.AddSingleton<ISampleService, SampleService>();
+            services.AddHttpClient<HttpClient>(httpClient =>
+            {
+                httpClient.DefaultRequestHeaders.Add("User-Agent",
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36");
+            });
+            services.AddSingleton<IJobsListingProvider, JobListingProvider>();
+            services.AddSingleton<JobDetailsProvider>();
             services.Configure<Configuration>(context.Configuration);
         });
