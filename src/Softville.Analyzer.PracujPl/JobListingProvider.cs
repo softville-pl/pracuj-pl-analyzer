@@ -16,7 +16,7 @@ internal class JobListingProvider(
 {
     public async Task ProcessAsync()
     {
-        using (var client = clientFactory.CreateClient())
+        using (var client = clientFactory.CreateClient("Pracuj"))
         {
             var baseOutputDir = @"d:\Data\PracujPL\Listing\";
 
@@ -46,7 +46,7 @@ internal class JobListingProvider(
 
                         var categotyUrlPath = jobCategory.Name.Replace(" & ", "%20").Replace(" - ", "%20-%20").Replace(" ", "%20").ToLower();
 
-                        var url = $"https://www.pracuj.pl/praca/{categotyUrlPath};cc,{jobCategory.Id}?pn={page}";
+                        var url = $"/praca/{categotyUrlPath};cc,{jobCategory.Id}?pn={page}";
                         var response = await client.GetAsync(url);
 
                         string html = await response.Content.ReadAsStringAsync();

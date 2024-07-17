@@ -17,7 +17,7 @@ public class JobDetailsProvider(IHttpClientFactory clientFactory, ILogger<JobDet
 
         var waitingPeriod = TimeSpan.FromSeconds(5);
 
-        using var httpClient = clientFactory.CreateClient();
+        var httpClient = clientFactory.CreateClient("Pracuj");
 
         var config = AngleSharp.Configuration.Default.WithDefaultLoader();
         var context = BrowsingContext.New(config);
@@ -63,12 +63,19 @@ public class JobDetailsProvider(IHttpClientFactory clientFactory, ILogger<JobDet
                     var subOfferElement = mainOfferElement.GetProperty("offers").EnumerateArray().First();
 
                     var offerId = subOfferElement.GetProperty("partitionId").GetInt32();
-                    var url = subOfferElement.GetProperty("offerAbsoluteUri").GetString();
+                    var url = subOfferElement.GetProperty("offerAbsoluteUri").GetString()!.Replace("https://www.pracuj.pl", "");
 
                     try
                     {
                         logger.LogInformation("\t\t\tFetching {offerIndex} of {offersCount} ({offerId}) from {url}",
                             offerIndex, jobOffersElements.Count, offerId, url);
+
+                        var detailsOutputFilePath = Path.Join(categoryOutputDir, $"{offerId}-details.json");
+                        if (Path.Exists(detailsOutputFilePath))
+                        {
+                            logger.LogInformation("{offerId} already downloaded. Skipping", offerId);
+                            continue;
+                        }
 
                         HttpResponseMessage response;
                         var maxRetry = 5;
@@ -81,6 +88,8 @@ public class JobDetailsProvider(IHttpClientFactory clientFactory, ILogger<JobDet
                             hasToBeRetried = response.IsSuccessStatusCode is false;
                             if (hasToBeRetried)
                             {
+                                httpClient.Dispose();
+                                httpClient = clientFactory.CreateClient("Pracuj");
                                 currentRetry++;
                                 var delayTimeout = waitingPeriod * currentRetry;
                                 logger.LogWarning("#{retry} retry. Waiting {delay}s", currentRetry,
@@ -109,7 +118,7 @@ public class JobDetailsProvider(IHttpClientFactory clientFactory, ILogger<JobDet
                             var jobDetailsElem = detailsDoc.RootElement.GetProperty("props").GetProperty("pageProps")
                                 .GetProperty("dehydratedState").GetProperty("queries").EnumerateArray().First().GetProperty("state").GetProperty("data");
 
-                            var detailsOutputFilePath = Path.Join(categoryOutputDir, $"{offerId}-details.json");
+
                             await File.WriteAllTextAsync(detailsOutputFilePath, jobDetailsElem.JsonPrettify(), ct);
                         }
 
@@ -123,5 +132,7 @@ public class JobDetailsProvider(IHttpClientFactory clientFactory, ILogger<JobDet
                 }
             }
         }
+
+        httpClient.Dispose();
     }
 }
