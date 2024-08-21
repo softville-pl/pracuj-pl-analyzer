@@ -13,12 +13,14 @@ using Microsoft.Extensions.Logging;
 using var host = CreateHostBuilder(args).Build();
 await host.StartAsync();
 
-// var sampleService = host.Services.GetRequiredService<IJobsListingProvider>();
-// await sampleService.ProcessAsync();
+var logger = host.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("App arguments: '{args}'", string.Join(Environment.NewLine, args));
 
-var sampleService = host.Services.GetRequiredService<JobDetailsProvider>();
-await sampleService.ProcessAsync(CancellationToken.None);
+if(args.Any(arg => arg.Equals("listing", StringComparison.OrdinalIgnoreCase)))
+    await host.Services.GetRequiredService<IJobsListingProvider>().ProcessAsync();
 
+if(args.Any(arg => arg.Equals("details", StringComparison.OrdinalIgnoreCase)))
+    await host.Services.GetRequiredService<JobDetailsProvider>().ProcessAsync(CancellationToken.None);
 
 Console.WriteLine("Press any key to continue");
 Console.ReadKey();
